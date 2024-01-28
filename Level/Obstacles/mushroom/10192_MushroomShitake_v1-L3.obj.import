@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://pah335x1alvs"
+path="res://.godot/imported/10192_MushroomShitake_v1-L3.obj-fe4ab88129dcbe63cfbb7ac92d57beee.mesh"
+
+[deps]
+
+files=["res://.godot/imported/10192_MushroomShitake_v1-L3.obj-fe4ab88129dcbe63cfbb7ac92d57beee.mesh"]
+
+source_file="res://Level/Obstacles/mushroom/10192_MushroomShitake_v1-L3.obj"
+dest_files=["res://.godot/imported/10192_MushroomShitake_v1-L3.obj-fe4ab88129dcbe63cfbb7ac92d57beee.mesh", "res://.godot/imported/10192_MushroomShitake_v1-L3.obj-fe4ab88129dcbe63cfbb7ac92d57beee.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

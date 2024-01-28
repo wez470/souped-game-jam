@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://eippd6o8e0ox"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_aj75p"]
+[ext_resource type="ArrayMesh" uid="uid://dyd2x8d01er6e" path="res://Player/10012_crab_v2_iterations-1.obj" id="2_j63hr"]
+[ext_resource type="Texture2D" uid="uid://km8efcjgi07r" path="res://Player/10012_crab_v1_Diffuse.jpg" id="3_f7ue8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h32l2"]
+albedo_texture = ExtResource("3_f7ue8")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pwlox"]
+height = 2.30406
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ap54h"]
+radius = 0.477935
+height = 3.64757
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_aj75p")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(-0.2, 3.01992e-08, 1.32005e-15, 0, -8.74228e-09, 0.2, 3.01992e-08, 0.2, 8.74228e-09, 0, 0, 0)
+mesh = ExtResource("2_j63hr")
+surface_material_override/0 = SubResource("StandardMaterial3D_h32l2")
+
+[node name="CollisionShapeFace" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.481654, -0.245532)
+shape = SubResource("CapsuleShape3D_pwlox")
+
+[node name="CollisionShapeBody" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.481654, 0)
+shape = SubResource("CapsuleShape3D_ap54h")
+
+[node name="CollisionShapeButt" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.481654, 0.662822)
+shape = SubResource("CapsuleShape3D_pwlox")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 4.20267, 0)
+shadow_enabled = true
+
+[node name="CameraBase" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraBase"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.0118263, 9.0848, 9.58257)

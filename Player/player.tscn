@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://eippd6o8e0ox"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_aj75p"]
+[ext_resource type="ArrayMesh" uid="uid://dyd2x8d01er6e" path="res://Player/10012_crab_v2_iterations-1.obj" id="2_j63hr"]
+[ext_resource type="Texture2D" uid="uid://km8efcjgi07r" path="res://Player/10012_crab_v1_Diffuse.jpg" id="3_f7ue8"]
+[ext_resource type="AudioStream" uid="uid://boek4uhaeknh" path="res://Player/boing-cut.ogg" id="4_vo41d"]
+[ext_resource type="AudioStream" uid="uid://dj06bep4iwan6" path="res://Player/mixkit-skateboard-pop.ogg" id="5_vrvni"]
+[ext_resource type="AudioStream" uid="uid://ldh5dkrgpfwd" path="res://Player/mixkit-skateboard-land.ogg" id="6_5e0up"]
+[ext_resource type="AudioStream" uid="uid://cvhguwuo7aaeg" path="res://Player/splash-by-blaukreuz-6261.mp3" id="7_od04v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h32l2"]
+albedo_texture = ExtResource("3_f7ue8")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r2hdi"]
+radius = 4.6
+height = 29.7543
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jxlji"]
+radius = 4.6
+height = 18.5
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_aj75p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2, 1.74846e-07, 7.64274e-15, 0, -8.74228e-08, 2, 1.74846e-07, 2, 8.74228e-08, 0, 0.000380099, 0)
+mesh = ExtResource("2_j63hr")
+surface_material_override/0 = SubResource("StandardMaterial3D_h32l2")
+
+[node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 4.4, 0)
+shape = SubResource("CapsuleShape3D_r2hdi")
+
+[node name="CollisionShapeBody2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 4.4, 0)
+shape = SubResource("CapsuleShape3D_jxlji")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 20.5291, 0)
+shadow_enabled = true
+
+[node name="CameraBase" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraBase"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.0118263, 83.4145, 99.4229)
+
+[node name="BoingPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vo41d")
+
+[node name="PopPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vrvni")
+volume_db = 2.0
+
+[node name="LandPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5e0up")
+volume_db = 1.0
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SplashPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_od04v")

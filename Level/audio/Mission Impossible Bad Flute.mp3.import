@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dp0jckokfrqxb"
+path="res://.godot/imported/Mission Impossible Bad Flute.mp3-cbe7da65a49a609546eca7bbb8cc4685.mp3str"
+
+[deps]
+
+source_file="res://Level/audio/Mission Impossible Bad Flute.mp3"
+dest_files=["res://.godot/imported/Mission Impossible Bad Flute.mp3-cbe7da65a49a609546eca7bbb8cc4685.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

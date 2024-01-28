@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxve1g3uf6l8l"]
+
+[ext_resource type="ArrayMesh" uid="uid://pah335x1alvs" path="res://Level/Obstacles/mushroom/10192_MushroomShitake_v1-L3.obj" id="1_hhm6k"]
+[ext_resource type="Script" path="res://Level/Obstacles/mushroom/mushroom.gd" id="1_jvthn"]
+[ext_resource type="Texture2D" uid="uid://dt71anlp2juci" path="res://Level/Obstacles/mushroom/MushroomShiitake.jpg" id="2_ih5c3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6l5s4"]
+albedo_texture = ExtResource("2_ih5c3")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7mypm"]
+points = PackedVector3Array(-0.0939796, -0.886458, 3.41366, 0.239109, 2.7017, 2.4443, 2.67961, -0.657351, 2.698, -0.447311, -0.245471, 0.0312612, -2.33673, -1.56191, 2.27133, 0.596607, -2.59497, 2.11929, -2.26465, 1.68358, 2.19036, 1.98886, 1.75514, 2.29327, -0.258865, 0.26115, 3.58152, 0.441457, -0.0602891, 0.187696, 1.87784, 1.24722, 3.08868, -0.273416, 0.450111, 0.0312612, -2.62237, 0.885122, 1.77171, -1.01153, -2.56538, 2.18951, -1.49123, 2.36405, 1.85815, 1.62825, -1.46098, 3.08638, 2.24998, -1.5505, 2.29327, -0.259589, -2.45676, 2.76256, -2.47886, -0.395993, 2.51375, 2.68499, 0.18845, 2.38043, -1.40211, 2.05909, 2.67334, -2.39003, -1.29679, 1.85566, -0.0989752, -0.506041, 0.0312612, 0.977314, 2.32403, 2.84578, 0.335491, 2.71239, 2.11929, -1.88846, -1.53448, 2.67132, -1.05676, -2.50829, 1.94532, 2.0407, -0.559124, 3.16975, -2.30155, 1.15947, 2.50981, 1.39478, -2.21973, 2.684, 1.20606, 2.45073, 2.20646, -0.828446, -0.148027, 3.40638)
+
+[node name="Mushroom" type="StaticBody3D"]
+script = ExtResource("1_jvthn")
+
+[node name="10192MushroomShitakeV1-l3" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, 10, 0, -10, -4.37114e-07, 0, 0, 0)
+mesh = ExtResource("1_hhm6k")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_6l5s4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, 10, 0, -10, -4.37114e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_7mypm")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, 10, 0, -10, -4.37114e-07, 0, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_7mypm")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

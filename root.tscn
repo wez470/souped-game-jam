@@ -1,46 +1,98 @@
-[gd_scene load_steps=7 format=3 uid="uid://oggp04lmtpb8"]
+[gd_scene load_steps=19 format=3 uid="uid://oggp04lmtpb8"]
 
-[ext_resource type="Script" path="res://Player/Player.gd" id="1_8ll5v"]
+[ext_resource type="PackedScene" uid="uid://eippd6o8e0ox" path="res://Player/player.tscn" id="1_2htff"]
+[ext_resource type="Script" path="res://root.gd" id="1_3vw54"]
+[ext_resource type="ArrayMesh" uid="uid://cxu52k8iyyrbs" path="res://Kitchen/stove/a.obj" id="3_obk4e"]
+[ext_resource type="PackedScene" uid="uid://dvwidgrjtmkqc" path="res://Kitchen/pot/Pot.tscn" id="4_500yy"]
+[ext_resource type="PackedScene" uid="uid://cvdmpwmkrvagk" path="res://Level/level.tscn" id="5_lfitp"]
+[ext_resource type="PackedScene" uid="uid://c5i5olimeejwl" path="res://Level/Obstacles/Corn/corn.tscn" id="6_kl3fw"]
+[ext_resource type="PackedScene" uid="uid://dxve1g3uf6l8l" path="res://Level/Obstacles/mushroom/mushroom.tscn" id="7_o80pp"]
+[ext_resource type="AudioStream" uid="uid://dp0jckokfrqxb" path="res://Level/audio/Mission Impossible Bad Flute.mp3" id="8_05is5"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_oxq4f"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kb4m3"]
+noise_type = 5
+fractal_gain = 0.3
+fractal_weighted_strength = 0.1
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwm4q"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dev84"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_kb4m3")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_q8kei"]
-size = Vector3(100, 1, 100)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ywt6"]
+albedo_color = Color(0.643137, 0.643137, 0.701961, 0.980392)
+albedo_texture = SubResource("NoiseTexture2D_dev84")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2s2p"]
-albedo_color = Color(0.407843, 0.258824, 0.164706, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1pn2g"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_i3tdk"]
-material = SubResource("StandardMaterial3D_j2s2p")
-size = Vector3(100, 1, 100)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ph8py"]
+albedo_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gtjpt"]
+size = Vector3(3341, 3952.33, 6742.73)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x1tg3"]
+sky_top_color = Color(0.341176, 0.482353, 0.658824, 1)
+sky_horizon_color = Color(0.529412, 0.345098, 0.298039, 1)
+
+[sub_resource type="Sky" id="Sky_e4uae"]
+sky_material = SubResource("ProceduralSkyMaterial_x1tg3")
+
+[sub_resource type="Environment" id="Environment_okn03"]
+sky = SubResource("Sky_e4uae")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7y4ft"]
 
 [node name="Root" type="Node3D"]
+script = ExtResource("1_3vw54")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239161, 2.53856, 0.129784)
-script = ExtResource("1_8ll5v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-mesh = SubResource("CapsuleMesh_oxq4f")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.836965, 0.547256, 0, -0.547256, 0.836965, 0.0118263, 3.47338, 2.52139)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_dwm4q")
+[node name="Player" parent="." instance=ExtResource("1_2htff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -270, 5830, 690)
 
 [node name="Stage" type="Node3D" parent="."]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Stage"]
+[node name="Kitchen" type="Node3D" parent="Stage"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/StaticBody3D"]
-shape = SubResource("BoxShape3D_q8kei")
+[node name="Stove" type="StaticBody3D" parent="Stage/Kitchen"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage"]
-mesh = SubResource("BoxMesh_i3tdk")
+[node name="Stove" type="MeshInstance3D" parent="Stage/Kitchen/Stove"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -19437.1, -343.609, 3159.97)
+material_override = SubResource("StandardMaterial3D_1ywt6")
+mesh = ExtResource("3_obk4e")
+surface_material_override/0 = SubResource("StandardMaterial3D_1pn2g")
+surface_material_override/1 = SubResource("StandardMaterial3D_1pn2g")
+surface_material_override/4 = SubResource("StandardMaterial3D_ph8py")
+surface_material_override/5 = SubResource("StandardMaterial3D_ph8py")
+surface_material_override/6 = SubResource("StandardMaterial3D_ph8py")
+surface_material_override/7 = SubResource("StandardMaterial3D_ph8py")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Kitchen/Stove"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -108.599, 1975.5, 139.482)
+shape = SubResource("BoxShape3D_gtjpt")
+
+[node name="Pot" parent="Stage/Kitchen" instance=ExtResource("4_500yy")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -287.248, 3983.46, 645.181)
+
+[node name="Level" parent="Stage" instance=ExtResource("5_lfitp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -270, 5794.6, 690)
+
+[node name="Corn2" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
+
+[node name="Corn3" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
+transform = Transform3D(0.674715, 0, 0.738079, 0, 1, 0, -0.738079, 0, 0.674715, -62.7589, 0, -143.721)
+
+[node name="Mushroom" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.331, -20.2842, -273.979)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0)
+transform = Transform3D(0.916156, 0.061176, 0.396125, -0.235231, -0.71813, 0.654948, 0.324536, -0.693215, -0.643528, 31.6817, 38.6476, -46.5778)
 light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_okn03")
+camera_attributes = SubResource("CameraAttributesPractical_7y4ft")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_05is5")
+volume_db = -10.0
+autoplay = true

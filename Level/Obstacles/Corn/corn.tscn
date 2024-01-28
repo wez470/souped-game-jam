@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5i5olimeejwl"]
+
+[ext_resource type="Texture2D" uid="uid://b4pwj6etjorko" path="res://Level/Obstacles/Corn/Corn_1.jpg" id="1_e3crn"]
+[ext_resource type="ArrayMesh" uid="uid://d2j8pwk8lnfo0" path="res://Level/Obstacles/Corn/Corn.obj" id="2_dmfwr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bn7br"]
+albedo_texture = ExtResource("1_e3crn")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j0s1m"]
+radius = 25.1229
+height = 200.658
+
+[node name="Corn" type="StaticBody3D"]
+
+[node name="Corn" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.393765, 0.919211, 0, -0.919211, 0.393765, 0, 0, 0, 1, 0, 0, -15)
+material_override = SubResource("StandardMaterial3D_bn7br")
+mesh = ExtResource("2_dmfwr")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.0286372, 0.99959, 0, -0.99959, -0.0286372, 0, 0, 0, 1, 0, 0, 2.57249)
+shape = SubResource("CapsuleShape3D_j0s1m")
