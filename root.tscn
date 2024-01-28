@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://oggp04lmtpb8"]
+[gd_scene load_steps=28 format=3 uid="uid://oggp04lmtpb8"]
 
 [ext_resource type="PackedScene" uid="uid://eippd6o8e0ox" path="res://Player/player.tscn" id="1_2htff"]
 [ext_resource type="Script" path="res://root.gd" id="1_3vw54"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c5i5olimeejwl" path="res://Level/Obstacles/Corn/corn.tscn" id="6_kl3fw"]
 [ext_resource type="PackedScene" uid="uid://dxve1g3uf6l8l" path="res://Level/Obstacles/mushroom/mushroom.tscn" id="7_o80pp"]
 [ext_resource type="AudioStream" uid="uid://dp0jckokfrqxb" path="res://Level/audio/Mission Impossible Bad Flute.mp3" id="8_05is5"]
+[ext_resource type="Script" path="res://HUD.gd" id="9_je1am"]
+[ext_resource type="AudioStream" uid="uid://dgt6bifephihy" path="res://man-scream-121085.mp3" id="10_dsi0k"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kb4m3"]
 noise_type = 5
@@ -31,6 +33,15 @@ albedo_color = Color(0.117647, 0.117647, 0.117647, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_gtjpt"]
 size = Vector3(3341, 3952.33, 6742.73)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uvap1"]
+size = Vector3(100, 500, 600)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t0bja"]
+size = Vector3(100, 500, 600)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_radlh"]
+albedo_color = Color(0, 0.223529, 1, 1)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x1tg3"]
 sky_top_color = Color(0.341176, 0.482353, 0.658824, 1)
 sky_horizon_color = Color(0.529412, 0.345098, 0.298039, 1)
@@ -42,6 +53,121 @@ sky_material = SubResource("ProceduralSkyMaterial_x1tg3")
 sky = SubResource("Sky_e4uae")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7y4ft"]
+
+[sub_resource type="Animation" id="Animation_67u6h"]
+resource_name = "souped"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1, 600]
+}
+
+[sub_resource type="Animation" id="Animation_i8g04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EscapedLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EscapedLabel:theme_override_font_sizes/font_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_1ig7m"]
+resource_name = "escaped"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EscapedLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EscapedLabel:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1, 1, 600]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cfie3"]
+_data = {
+"RESET": SubResource("Animation_i8g04"),
+"escaped": SubResource("Animation_1ig7m"),
+"souped": SubResource("Animation_67u6h")
+}
 
 [node name="Root" type="Node3D"]
 script = ExtResource("1_3vw54")
@@ -81,8 +207,71 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -270, 5794.6, 690)
 [node name="Corn3" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
 transform = Transform3D(0.674715, 0, 0.738079, 0, 1, 0, -0.738079, 0, 0.674715, -62.7589, 0, -143.721)
 
+[node name="Corn4" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
+transform = Transform3D(0.674715, 0, 0.738079, 0, 1, 0, -0.738079, 0, 0.674715, 400.618, 0, -60.9294)
+
+[node name="Corn5" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
+transform = Transform3D(0.674715, 0, 0.738079, 0, 1, 0, -0.738079, 0, 0.674715, 639.602, 0, 228.257)
+
+[node name="Corn7" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
+transform = Transform3D(0.674715, 0, 0.738079, 0, 1, 0, -0.738079, 0, 0.674715, 857.932, 0, -14.0449)
+
+[node name="Corn6" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
+transform = Transform3D(-0.818511, 0, 0.574491, 0, 1, 0, -0.574491, 0, -0.818511, 763.381, 0, 101.526)
+
+[node name="Corn8" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
+transform = Transform3D(0.800638, 0, 0.59915, 0, 1, 0, -0.59915, 0, 0.800638, 1004.75, 0, -619.325)
+
+[node name="Corn9" parent="Stage/Level" instance=ExtResource("6_kl3fw")]
+transform = Transform3D(0.731708, 0.0617657, 0.678815, 0.406255, 0.760151, -0.507078, -0.547322, 0.646804, 0.531116, 1048.58, 55.0439, -650.936)
+
 [node name="Mushroom" parent="Stage/Level" instance=ExtResource("7_o80pp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.331, -20.2842, -273.979)
+
+[node name="Mushroom2" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.01, -20.2842, -273.979)
+
+[node name="Mushroom3" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 311.567, -20.2842, -195.464)
+
+[node name="Mushroom4" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 345.888, -20.2842, 102.966)
+
+[node name="Mushroom5" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 299.484, -20.2842, 229.557)
+
+[node name="Mushroom6" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 355.478, -20.2842, 366.382)
+
+[node name="Mushroom7" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 490.112, -20.2842, 366.382)
+
+[node name="Mushroom8" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 915.503, -20.2842, -159.087)
+
+[node name="Mushroom9" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 859.265, -20.2842, -257.524)
+
+[node name="Mushroom10" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 825.025, -20.2842, -397.039)
+
+[node name="Mushroom11" parent="Stage/Level" instance=ExtResource("7_o80pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 883.111, -20.2842, -532.546)
+
+[node name="Node3D" type="Node3D" parent="Stage/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1135.15, 110.402, -716.505)
+
+[node name="End" type="Area3D" parent="Stage/Level/Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Level/Node3D/End"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
+shape = SubResource("BoxShape3D_uvap1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Level/Node3D/End"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_t0bja")
+surface_material_override/0 = SubResource("StandardMaterial3D_radlh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.916156, 0.061176, 0.396125, -0.235231, -0.71813, 0.654948, 0.324536, -0.693215, -0.643528, 31.6817, 38.6476, -46.5778)
@@ -94,5 +283,56 @@ camera_attributes = SubResource("CameraAttributesPractical_7y4ft")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_05is5")
-volume_db = -10.0
+volume_db = -14.0
 autoplay = true
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_je1am")
+
+[node name="Label" type="Label" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 1
+text = "Souped!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EscapedLabel" type="Label" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.415686, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 1
+text = "FREEDOM!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+libraries = {
+"": SubResource("AnimationLibrary_cfie3")
+}
+
+[node name="SplatPlayer" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource("10_dsi0k")
+
+[connection signal="body_entered" from="Stage/Level/Node3D/End" to="Player" method="_on_end_body_entered"]

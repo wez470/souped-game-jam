@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://eippd6o8e0ox"]
+[gd_scene load_steps=12 format=3 uid="uid://eippd6o8e0ox"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_aj75p"]
 [ext_resource type="ArrayMesh" uid="uid://dyd2x8d01er6e" path="res://Player/10012_crab_v2_iterations-1.obj" id="2_j63hr"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dj06bep4iwan6" path="res://Player/mixkit-skateboard-pop.ogg" id="5_vrvni"]
 [ext_resource type="AudioStream" uid="uid://ldh5dkrgpfwd" path="res://Player/mixkit-skateboard-land.ogg" id="6_5e0up"]
 [ext_resource type="AudioStream" uid="uid://cvhguwuo7aaeg" path="res://Player/splash-by-blaukreuz-6261.mp3" id="7_od04v"]
+[ext_resource type="AudioStream" uid="uid://b4x58a1stc71e" path="res://freedom!.mp3" id="8_xmdiu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h32l2"]
 albedo_texture = ExtResource("3_f7ue8")
@@ -36,7 +37,7 @@ transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114
 shape = SubResource("CapsuleShape3D_jxlji")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 20.5291, 0)
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 37.369, 0)
 shadow_enabled = true
 
 [node name="CameraBase" type="Node3D" parent="."]
@@ -59,5 +60,12 @@ volume_db = 1.0
 wait_time = 2.0
 one_shot = true
 
+[node name="EscapedTimer" type="Timer" parent="."]
+wait_time = 12.0
+one_shot = true
+
 [node name="SplashPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_od04v")
+
+[node name="EscapedPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_xmdiu")

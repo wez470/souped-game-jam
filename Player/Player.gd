@@ -10,7 +10,9 @@ const starting_pos: Vector3 = Vector3(-270, 5830, 690)
 @onready var _pop_player: AudioStreamPlayer = $PopPlayer
 @onready var _land_player: AudioStreamPlayer = $LandPlayer
 @onready var _splash_player: AudioStreamPlayer = $SplashPlayer
+@onready var _escaped_player: AudioStreamPlayer = $EscapedPlayer
 @onready var _death_timer: Timer = $DeathTimer
+@onready var _escaped_timer: Timer = $EscapedTimer
 
 const SPEED = 100.0
 const JUMP_VELOCITY = 145.0
@@ -28,9 +30,15 @@ var _backflip_end_rotation: float = -5 * PI / 2
 var _jumping: bool = false
 var _was_on_floor: bool = false
 var _souped: bool = false
+var _escaped: bool = false
+var _hud: Node
+var _music: AudioStreamPlayer
 
 func _ready() -> void:
 	_death_timer.connect("timeout", _done_death)
+	_escaped_timer.connect("timeout", _done_death)
+	_hud = get_node("../HUD")
+	_music = get_node("../AudioStreamPlayer")
 
 
 func _input(event):
@@ -41,7 +49,7 @@ func _input(event):
 
 
 func _physics_process(delta):
-	if _souped:
+	if _souped or _escaped:
 		return
 	
 	if _frontflipping:
@@ -110,6 +118,8 @@ func jump(forward: bool, vel: float) -> void:
 
 
 func boing() -> void:
+	if _souped:
+		return
 	_boing_player.play()
 	jump(true, JUMP_VELOCITY * 2.5)
 
@@ -117,14 +127,34 @@ func boing() -> void:
 func souped() -> void:
 	_splash_player.play()
 	_souped = true
+	_hud.souped()
 	_death_timer.start()
 
 
 func _done_death() -> void:
+	_hud.reset()
 	position = starting_pos
+	if !_music.playing:
+		_music.play()
 	_jumping = false
 	_last_frames_on_floor = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
 	_frontflipping = false
 	_backflipping = false
 	_on_floor_last_frame = false
+	_mesh.rotation.x = deg_to_rad(-90)
 	_souped = false
+	_escaped = false
+
+
+func _on_end_body_entered(body):
+	if "escaped" in body:
+		body.escaped()
+
+
+func escaped() -> void:
+	_hud.escaped()
+	_music.stop()
+	_escaped = true
+	_escaped_timer.start()
+	_escaped_player.play()
+	
